@@ -61,9 +61,9 @@
         <div class="bg-white rounded-xl shadow-md p-6 mb-6" data-aos="fade-up">
             <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
 
-                <div class="flex items-center space-x-4">
+                <div class="flex items-left space-x-3">
                     <!-- Power Button -->
-                    <div class="flex">
+                    <div class="flex items-center">
                         <div class="relative inline-block w-12 mr-2 align-middle select-none">
                             <input type="checkbox" name="toggle" id="powerToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
                             <label for="powerToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
@@ -72,7 +72,7 @@
                     </div>
 
                     <!-- Auto Response Toggle -->
-                    <div class="flex">
+                    <div class="flex items-center">
                         <div class="relative inline-block w-12 mr-2 align-middle select-none">
                             <input type="checkbox" name="autoResponse" id="autoResponseToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
                             <label for="autoResponseToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
@@ -80,7 +80,7 @@
                         <label for="autoResponseToggle" class="text-gray-700 font-medium">Contexto IA</label>
                     </div>
                     <!-- Save Conversation Toggle -->
-                    <div class="flex">
+                    <div class="flex items-center">
                         <div class="relative inline-block w-12 mr-2 align-middle select-none">
                             <input type="checkbox" name="saveConversation" id="saveConversationToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked/>
                             <label for="saveConversationToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
@@ -89,9 +89,9 @@
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-4">
+                <div class="flex items-right space-x-2">
                     <!-- Font Size -->
-                    <div class="flex">
+                    <div class="flex items-center">
                         <i data-feather="type" class="text-gray-500 mr-2"></i>
                         <select id="fontSize" class="px-1 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             <option value="14">Pequeño</option>
@@ -102,7 +102,7 @@
                         </select>
                     </div>
                     <!-- Clear Button -->
-                    <div class="flex"></div>
+                    <div class="flex items-center"></div>
                         <button id="clearButton" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors flex items-center space-x-2">
                             <i data-feather="trash-2"></i>
                             <span>Limpiar</span>
