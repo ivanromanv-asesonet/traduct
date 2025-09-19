@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsesoNet - Traducción Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 px-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i data-feather="globe" class="text-indigo-600"></i>
+                <h1 class="text-2xl font-bold text-indigo-700"><img src="logo_asesonet.png" alt="AsesoNet" class="h-10 rounded-md"></h1>
+                <h4 class="p-1 text-purple-800 rounded-md">Consultoría Tecnológica</h4>
+            </div>
+            <div class="flex items-center space-x-4">
+                <h4 class="p-1 bg-purple-100 text-purple-800 rounded-md">Contextualize AI</h4>
+                <button id="settingsBtn" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <i data-feather="settings" class="text-gray-600"></i>
+                </button>                
+            </div>
+        </div>        
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Frame 1 -->
+            <div class="frame p-6" data-aos="fade-right">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-gray-700">Escuchar</h2>
+                    <select id="language1" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="en">English</option>
+                        <option value="es" selected>Español</option>
+                    </select>
+                </div>
+                <div id="textOutput1" class="text-display p-4 border border-gray-200 rounded-md bg-white mb-4"></div>
+            </div>
+
+            <!-- Frame 2 -->
+            <div class="frame p-6" data-aos="fade-left">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-gray-700">Traducir</h2>
+                    <select id="language2" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="en" selected>English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </div>
+                <div id="textOutput2" class="text-display p-4 border border-gray-200 rounded-md bg-white mb-4"></div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6" data-aos="fade-up">
+            <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
+
+                <div class="flex items-center space-x-4">
+                    <!-- Power Button -->
+                    <div class="flex items-center">
+                        <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                            <input type="checkbox" name="toggle" id="powerToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                            <label for="powerToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                        </div>
+                        <label for="powerToggle" class="text-gray-700 font-medium">Traducción</label>
+                    </div>
+
+                    <!-- Auto Response Toggle -->
+                    <div class="flex items-center">
+                        <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                            <input type="checkbox" name="autoResponse" id="autoResponseToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                            <label for="autoResponseToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                        </div>
+                        <label for="autoResponseToggle" class="text-gray-700 font-medium">Respuesta IA</label>
+                    </div>
+                    <!-- Save Conversation Toggle -->
+                    <div class="flex items-center">
+                        <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                            <input type="checkbox" name="saveConversation" id="saveConversationToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked/>
+                            <label for="saveConversationToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                        </div>
+                        <label for="saveConversationToggle" class="text-gray-700 font-medium">Guardar Chat</label>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Font Size -->
+                    <div class="flex items-center">
+                        <i data-feather="type" class="text-gray-500 mr-2"></i>
+                        <select id="fontSize" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="14">Pequeño</option>
+                            <option value="16" selected>Mediano</option>
+                            <option value="18">Grande</option>
+                            <option value="20">Muy Grande</option>
+                            <option value="30">Extra Grande</option>
+                        </select>
+                    </div>
+                    <!-- Clear Button -->
+                    <div class="flex items-center"></div>
+                        <button id="clearButton" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors flex items-center space-x-2">
+                            <i data-feather="trash-2"></i>
+                            <span>Limpiar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="statusIndicator" class="mt-4 p-3 bg-gray-100 rounded-md text-center hidden">
+                <div class="flex items-center justify-center">
+                    <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse mr-2"></div>
+                    <span class="text-gray-700">Modo Escucha: Inactivo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Option and Message Strip Container -->
+        <div class="flex items-center justify-between mb-8" data-aos="fade-up">
+            <!-- Message Strip -->
+            <div id="messageStrip" class="p-0 text-sm font-medium transition-all duration-500 ease-out opacity-0 z-50 flex items-center rounded-lg shadow-md" style="max-width: 0; overflow: hidden; white-space: nowrap;">
+                <!-- Content will be dynamically added by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal modal-closed fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-semibold text-gray-800">Configuración</h3>
+                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium text-gray-700 mb-4">Configuración de Gemini AI</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">API Key</label>
+                            <input type="password" id="apiKey" placeholder="Ingresa tu API Key" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Modelo</label>
+                            <select id="model" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="gemini-2.5-flash" selected>gemini-2.5-flash</option>
+                                <option value="gemini-pro">gemini-pro</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" id="email" placeholder="Tu email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                            <input type="password" id="password" placeholder="Tu contraseña" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium text-gray-700 mb-4">Archivos de Contexto</h4>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Palabras Clave (TXT)</label>
+                        <div class="flex items-center">
+                            <input type="file" id="keywordsFile" accept=".txt" class="hidden">
+                            <button id="keywordsBtn" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-l-md border border-gray-300 hover:bg-gray-200">Seleccionar archivo</button>                            <span id="keywordsName" class="px-3 py-2 bg-gray-50 text-gray-500 border border-l-0 border-gray-300 rounded-r-md flex-grow">Ningún archivo seleccionado</span>
+                            <button id="keywordsClearBtn" class="ml-2 px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 hidden">&times;</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Contexto Principal (TXT)</label>
+                        <div class="flex items-center">
+                            <input type="file" id="contextFile" accept=".txt,.docx" class="hidden">
+                            <button id="contextBtn" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-l-md border border-gray-300 hover:bg-gray-200">Seleccionar archivo</button>
+                            <span id="contextName" class="px-3 py-2 bg-gray-50 text-gray-500 border border-l-0 border-gray-300 rounded-r-md flex-grow">Ningún archivo seleccionado</span>
+                            <button id="contextClearBtn" class="ml-2 px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 hidden">&times;</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2 mt-2">
+                        <button id="activateKeywords" class="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded hover:bg-gray-300">Activar Palabras Clave</button>
+                        <button id="activateContext" class="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded hover:bg-gray-300">Activar Contexto</button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium text-gray-700 mb-4">Funcionalidad</h4>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                                <input type="checkbox" name="voiceToggle" id="voiceToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                <label for="voiceToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                            </div>
+                            <label for="voiceToggle" class="text-gray-700 font-medium">Activar Voz</label>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                                <input type="checkbox" name="allowDeleteToggle" id="allowDeleteToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                <label for="allowDeleteToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                            </div>
+                            <label for="allowDeleteToggle" class="text-gray-700 font-medium">Permitir Eliminar</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button id="cancelSettings" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancelar</button>
+                    <button id="saveSettings" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Guardar Configuración</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
